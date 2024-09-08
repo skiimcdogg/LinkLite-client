@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es5",                          // Version cible de JavaScript
+    "lib": ["dom", "dom.iterable", "esnext"], // Bibliothèques à inclure
+    "allowJs": true,                          // Permettre les fichiers .js
+    "skipLibCheck": true,                     // Ignore la vérification des fichiers de type
+    "esModuleInterop": true,                  // Interopérabilité des modules ES
+    "allowSyntheticDefaultImports": true,     // Permet l'importation par défaut synthétique
+    "strict": true,                           // Activer la vérification stricte des types
+    "forceConsistentCasingInFileNames": true, // Forcer la casse cohérente des noms de fichiers
+    "module": "esnext",                       // Module cible
+    "moduleResolution": "node",               // Résolution des modules
+    "resolveJsonModule": true,                // Permettre l'importation de modules JSON
+    "isolatedModules": true,                  // Chaque fichier est traité comme un module indépendant
+    "noEmit": true,                           // Ne pas émettre les fichiers de sortie
+    "jsx": "react-jsx"                        // Supporte JSX avec React 17 et supérieur
+  },
+  "include": ["src"]  // Inclut tous les fichiers dans le dossier src
+}
