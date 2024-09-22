@@ -51,6 +51,15 @@ service.interceptors.response.use(
 const authApiHandler = {
     service, 
 
+    async signup(userData) {
+        try {
+            const response = await service.post('/signup/', userData);
+            return response.data;
+        } catch(err) {
+            errorHandler(err);
+        }
+    },
+
     async login(username, password) {
         try {
             const response = await service.post('/login/', { username, password });
