@@ -44,34 +44,3 @@ function UserEmailVerification() {
 };
 
 export default UserEmailVerification;
-
-
-//   useEffect(() => {
-//     const verifyEmail = async () => {
-//       try {
-//         const response = await axios.get(`/api/verify-email?token=${token}`);
-//         setStatus(response.data.detail);
-//         setTimeout(() => {
-//           history.push('/login');  // Redirige vers la page de connexion après quelques secondes
-//         }, 3000);
-//       } catch (error) {
-//         setStatus('Le lien de vérification est invalide ou a expiré.');
-//       }
-//     };
-
-//     if (token) {
-//       verifyEmail();
-//     } else {
-//       setStatus('Token de vérification manquant.');
-//     }
-//   }, [token, history]);
-
-//   return (
-//     <div>
-//       <h1>Vérification de l'e-mail</h1>
-//       <p>{status}</p>
-//     </div>
-//   );
-// };
-
-// export default EmailVerification;
