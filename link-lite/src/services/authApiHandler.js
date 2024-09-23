@@ -1,19 +1,19 @@
 import axios from 'axios';
 
-const getAccessToken = () => localStorage.getItem("access_token")
+const getAccessToken = () => localStorage.getItem("access_token");
 
 const service = axios.create({
     baseUrl: process.env.REACT_APP_AUTH_BACKEND_URL,
     headers: {
         'Content-Type': 'application/json',
       }
-})
+});
 
 function errorHandler(error) {
     if(error.response.data) {
         console.error(error.response.data);
         throw error;
-    }
+    };
     throw error;
 }
 
@@ -31,7 +31,7 @@ service.interceptors.response.use(
         const originalRequest = err.config;
         if(err.response.status === 401 && !originalRequest._retry) {
             originalRequest._retry = true;
-        }
+        };
         try {
             const refreshToken = localStorage.getItem("refresh_token");
             const response = await service.post("/token/refresh/", { refresh: refreshToken});
@@ -43,7 +43,7 @@ service.interceptors.response.use(
             localStorage.removeItem('access_token');
             localStorage.removeItem('refresh_token');
             window.location.href = '/login'; 
-        }
+        };
         return Promise.reject(err);
     }
 )
@@ -57,7 +57,16 @@ const authApiHandler = {
             return response.data;
         } catch(err) {
             errorHandler(err);
-        }
+        };
+    },
+
+    async verifyEmail(token) {
+        try {
+            const response = await axios.get(`/api/verify-email?token=${token}`);
+            return response;      
+        } catch (err) {
+            errorHandler(err);
+        };
     },
 
     async login(username, password) {
@@ -68,7 +77,7 @@ const authApiHandler = {
             return response.data;
         } catch(err) {
             errorHandler(err)
-        }
+        };
       },
 
     async getUserData() {
@@ -77,7 +86,7 @@ const authApiHandler = {
             return response.data;
         } catch(err) {
             errorHandler(err)
-        }
+        };
       },
 
     logout() {
@@ -87,7 +96,7 @@ const authApiHandler = {
             window.location.href = '/login';
         } catch(err) {
             errorHandler(err)
-        }
+        };
       }
 }
 
