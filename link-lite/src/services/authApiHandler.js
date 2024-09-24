@@ -62,7 +62,7 @@ const authApiHandler = {
 
     async verifyEmail(token) {
         try {
-            const response = await axios.get(`/api/verify-email?token=${token}`);
+            const response = await axios.get(`/verify-email?token=${token}`);
             return response;      
         } catch (err) {
             errorHandler(err);
@@ -71,7 +71,7 @@ const authApiHandler = {
 
     async login(username, password) {
         try {
-            const response = await service.post('/login/', { username, password });
+            const response = await service.post('/login', { username, password });
             localStorage.setItem('access_token', response.data.access);
             localStorage.setItem('refresh_token', response.data.refresh);
             return response.data;
@@ -82,7 +82,7 @@ const authApiHandler = {
 
     async getUserData() {
         try {
-            const response = await service.get('/user/');
+            const response = await service.get('/user');
             return response.data;
         } catch(err) {
             errorHandler(err)
