@@ -1,12 +1,34 @@
 import "./App.css";
+import Header from "./Components/Header/Header";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "./Components/Home/Home";
+import UserPage from "./Components/UserPage/UserPage";
+import About from "./Components/About/About";
+import UserSignIn from "./Components/UserCredentials/UserSignIn";
+import UserSignUp from "./Components/UserCredentials/UserSignUp";
+import Sidebar from "./Components/Sidebar/Sidebar";
 
 function App() {
   return (
-    <div className="App">
-        <div className="bg-blue-500 text-white p-4">
-          <h1 className="text-2xl font-bold">Hello, Tailwind CSS!</h1>
+    <Router>
+      <div className="App">
+        <div>
+          <Header />
         </div>
-    </div>
+        <div>
+          <Sidebar />
+        </div>
+        <div>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/my-page" element={<UserPage />} />
+            <Route path="/login" element={<UserSignIn />} />
+            <Route path="/signup" element={<UserSignUp />} />
+            <Route path="/about" element={<About />} />
+          </Routes>
+        </div>
+      </div>
+    </Router>
   );
 }
 
