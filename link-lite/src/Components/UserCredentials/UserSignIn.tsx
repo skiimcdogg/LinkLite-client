@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import authApiHandler from '../../services/authApiHandler';
 
@@ -62,6 +63,7 @@ function UserSignIn() {
         {error && <p style={{ color: 'red' }}>{error}</p>}
         <button type="submit">Connect</button>
       </form>
+      <p>No account yet ? Create an account here: <Link to={"/signup"}>Signup</Link></p>
     </div>
   );
 };

@@ -47,7 +47,9 @@ export const UserProvider: React.FC<UserProviderProp> = ({ children }) => {
 
     const clearUser = () => {
         setUser(null);
-        localStorage.removeItem('user')
+        localStorage.removeItem('user');
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
     }
 
     return (

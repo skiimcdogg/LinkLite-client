@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import apiHandler from '../../services/apiHandler';
-
+import React, { useState } from "react";
+import apiHandler from "../../services/apiHandler";
 
 function LinkReducer() {
-  const [originalUrl, setOriginalUrl] = useState<string>('');
-  const [newUrl, setNewUrl] = useState<string>('')
-  const [error, setError] = useState<string>('');
+  const [originalUrl, setOriginalUrl] = useState<string>("");
+  const [newUrl, setNewUrl] = useState<string>("");
+  const [error, setError] = useState<string>("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -16,11 +15,11 @@ function LinkReducer() {
     event.preventDefault();
     try {
       const response = await apiHandler.shortenUrl(originalUrl);
-      setNewUrl(response.data)
-    } catch(err) {
-      setError('Error during the process. Please retry later.');
+      setNewUrl(response.data);
+    } catch (err) {
+      setError("Error during the process. Please retry later.");
       console.error(err);
-    };
+    }
   };
 
   return (
@@ -39,10 +38,9 @@ function LinkReducer() {
           />
         </div>
       </form>
-      { error ? <p style={{ color: "red" }}>{error}</p> :
-       <p>{newUrl}</p> }
+      {error ? <p style={{ color: "red" }}>{error}</p> : <p>{newUrl}</p>}
     </div>
   );
-};
+}
 
 export default LinkReducer;

@@ -24,6 +24,7 @@ function UserPage() {
       console.error('Problem during fetching urls.', err)
     };
   };
+  fetchUrls();
   }, []);
 
   if (!user) {
