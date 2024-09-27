@@ -25,8 +25,13 @@ export const UserProvider: React.FC<UserProviderProp> = ({ children }) => {
     useEffect(() => {
         const fetchUser = async() => {
             try {
+                const accessToken = localStorage.getItem('access_token');
+                if (!accessToken) {
+                    console.warn('Aucun token trouvé, pas de tentative de récupération de l\'utilisateur');
+                    return;
+                }
                 const savedUser = localStorage.getItem('user');
-                if(savedUser) {
+                if(savedUser && savedUser !== "undefined") {
                     setUser(JSON.parse(savedUser));
                 } else {
                     const response = await authApiHandler.getUserData();

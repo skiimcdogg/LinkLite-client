@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams  } from 'react-router-dom';
 import axios from 'axios';
 import authApiHandler from '../../services/authApiHandler';
 
@@ -7,9 +7,9 @@ import authApiHandler from '../../services/authApiHandler';
 function UserEmailVerification() {
   const [status, setStatus] = useState<string>("");
   const [error, setError] = useState("")
-  const query = new URLSearchParams(useLocation().search);
-  const token = query.get("token");
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const token = searchParams.get("token")
 
   useEffect(() => {
     const verifyEmail = async() => {
@@ -21,7 +21,10 @@ function UserEmailVerification() {
           }, 3000)
       } catch(err) {
         if(axios.isAxiosError(err)) {
-          setError(err.response?.data || 'Error')
+          setError(
+            typeof err.response?.data === 'string' ?
+            err.response?.data : JSON.stringify(err.response?.data)
+          )
         } else {
           setError('Verification link error or expired.');
         }

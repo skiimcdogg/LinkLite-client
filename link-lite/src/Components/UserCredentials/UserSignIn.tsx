@@ -27,7 +27,7 @@ function UserSignIn() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      await authApiHandler.signup(formData);
+      await authApiHandler.login(formData);
       navigate("/");
     } catch(err) {
       setError('Credentials Error.');
