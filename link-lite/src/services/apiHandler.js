@@ -1,16 +1,4 @@
-import axios from 'axios';
-
-const service = axios.create({
-    baseURL: process.env.REACT_APP_BACKEND_URL
-})
-
-function errorHandler(error) {
-    if(error.response.data) {
-        console.error(error.response.data);
-        throw error;
-    }
-    throw error;
-}
+import { service, errorHandler, getAccessToken } from "./apiServices";
 
 const apiHandler = {
     service,
@@ -26,7 +14,9 @@ const apiHandler = {
 
     async getUrlsList() {
         try {
-            const response = await service.get("/list-user-urls");
+            const response = await service.get("/list-user-urls/", { headers: {
+                'Authorization': `Bearer ${getAccessToken}`}
+            });
             return response.data
         } catch(err) {
             errorHandler(err)

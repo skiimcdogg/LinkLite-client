@@ -16,6 +16,7 @@ function UserListUrls({ urls }: UserListUrlsProps) {
                 <th>Original URL</th>
                 <th>Creation Date</th>
             </tr>
+        </thead>
         <tbody>
             {
                 urls.map((url: UserUrl) => (
@@ -31,7 +32,6 @@ function UserListUrls({ urls }: UserListUrlsProps) {
                 ))
             }
         </tbody>
-        </thead>
       </table>
     </div>
   );

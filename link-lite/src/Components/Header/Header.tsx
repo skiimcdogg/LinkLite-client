@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
 import authApiHandler from "../../services/authApiHandler";
@@ -24,7 +23,6 @@ function Header() {
       user ? <button onClick={handleLogout}>Logout</button> : 
       <Link to={"/login"}>Login</Link>
       }
-      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 }
