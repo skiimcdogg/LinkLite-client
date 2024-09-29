@@ -1,11 +1,11 @@
-import { service, errorHandler, getAccessToken } from "./apiServices";
+import { initializeService, errorHandler, getAccessToken } from "./apiServices";
 
 const apiHandler = {
-    service,
 
     async shortenUrl(originalUrl) {
         try {
-            const response = await service.post("/shorten-url", originalUrl);
+            const service = await initializeService();
+            const response = await service.post("/shorten-url/", originalUrl);
             return response.data
         } catch(err) {
             errorHandler(err)
@@ -14,6 +14,7 @@ const apiHandler = {
 
     async getUrlsList() {
         try {
+            const service = await initializeService();
             const response = await service.get("/list-user-urls/", { headers: {
                 'Authorization': `Bearer ${getAccessToken}`}
             });
@@ -25,6 +26,7 @@ const apiHandler = {
 
     async redirectNewUrl(shortenUrl) {
         try {
+            const service = await initializeService();
             const response = await service.get(`/${shortenUrl}`, { maxRedirects: 0 });
             if(response.status >= 300 && response.status < 400) {
                 const redirectUrl = response.headers.location;
@@ -41,6 +43,7 @@ const apiHandler = {
 
     async deleteUrl(shortenUrl) {
         try {
+            const service = await initializeService();
             const response = await service.delete(`/delete-url/${shortenUrl}/`);
             console.log(response.data.detail);
         } catch(err) {

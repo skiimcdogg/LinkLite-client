@@ -37,6 +37,7 @@ function LinkReducer() {
             required
           />
         </div>
+        <button type="submit">Shorten</button>
       </form>
       {error ? <p style={{ color: "red" }}>{error}</p> : <p>{newUrl}</p>}
     </div>

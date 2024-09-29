@@ -1,10 +1,11 @@
-import { service, errorHandler, getAccessToken } from "./apiServices";
+import { initializeService, errorHandler, getAccessToken } from "./apiServices";
+
 
 const authApiHandler = {
-  service,
 
   async signup(userData) {
     try {
+      const service = await initializeService();
       const response = await service.post("/api/register/", userData);
       return response.data;
     } catch (err) {
@@ -14,6 +15,7 @@ const authApiHandler = {
 
   async verifyEmail(token) {
     try {
+      const service = await initializeService();
       const response = await service.get(`/api/verify-email?token=${token}`);
       return response;
     } catch (err) {
@@ -23,6 +25,7 @@ const authApiHandler = {
 
   async login(formData) {
     try {
+      const service = await initializeService();
       const response = await service.post("/api/login/", formData);
       localStorage.setItem("access_token", response.data.access);
       localStorage.setItem("refresh_token", response.data.refresh);
@@ -35,6 +38,7 @@ const authApiHandler = {
   },
 
   async getUserData() {
+    const service = await initializeService();
     const token = getAccessToken();
     if (token) {
       try {
@@ -49,12 +53,17 @@ const authApiHandler = {
   },
 
   async logout() {
+    const service = await initializeService();
     try {
       const refreshToken = localStorage.getItem("refresh_token");
       if (!refreshToken) {
         throw new Error("No refresh token found");
       }
-      await service.post("/api/logout/", { refresh: refreshToken });      
+      const response = await service.post("/api/logout/", { refresh: refreshToken });  
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("refresh_token");
+      window.location.href = "/login";
+      return response;    
     } catch (err) {
       errorHandler(err);
     }
