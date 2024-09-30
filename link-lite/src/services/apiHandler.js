@@ -2,10 +2,17 @@ import { initializeService, errorHandler, getAccessToken } from "./apiServices";
 
 const apiHandler = {
 
-    async shortenUrl(originalUrl) {
+    async shortenUrl(originalUrl, userId) {
         try {
             const service = await initializeService();
-            const response = await service.post("/shorten-url/", originalUrl);
+            const accessToken = getAccessToken();            
+            const response = await service.post("/shorten-url/", { originalUrl, userId },
+                {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                }
+            );            
             return response.data
         } catch(err) {
             errorHandler(err)

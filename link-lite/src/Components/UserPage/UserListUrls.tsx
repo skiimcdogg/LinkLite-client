@@ -6,6 +6,8 @@ type UserListUrlsProps = {
 };
 
 function UserListUrls({ urls }: UserListUrlsProps) {
+
+    
   return (
     <div>
       <h1>Your Urls</h1>
@@ -22,12 +24,12 @@ function UserListUrls({ urls }: UserListUrlsProps) {
                 urls.map((url: UserUrl) => (
                     <tr key={url.id}>
                         <td>
-                            <a href={url.shortUrl} target="_blank" rel="noopener noreferrer">
-                                {url.shortUrl}
+                            <a href={`${process.env.REACT_APP_BACKEND_URL}${url.short_url}`} target="_blank" rel="noopener noreferrer">
+                            {`${process.env.REACT_APP_BACKEND_URL}${url.short_url}`}
                             </a>
                         </td>
-                        <td>{ url.originalUrl }</td>
-                        <td>{ url.createdAt }</td>
+                        <td>{ url.original_url }</td>
+                        <td>{ url.created_at }</td>
                     </tr>
                 ))
             }

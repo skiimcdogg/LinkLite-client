@@ -62,6 +62,7 @@ const authApiHandler = {
       const response = await service.post("/api/logout/", { refresh: refreshToken });  
       localStorage.removeItem("access_token");
       localStorage.removeItem("refresh_token");
+      localStorage.removeItem("user");
       window.location.href = "/login";
       return response;    
     } catch (err) {

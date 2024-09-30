@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useUser } from '../../context/UserContext';
 import { UserUrl } from '../../type';
 import apiHandler from '../../services/apiHandler';
@@ -19,7 +19,7 @@ function UserPage() {
     const fetchUrls = async() => {
     try {
       const response = await apiHandler.getUrlsList();
-      setuserUrls(response.data)
+      setuserUrls(response)
     } catch(err) {
       console.error('Problem during fetching urls.', err)
     };
