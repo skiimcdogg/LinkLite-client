@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import apiHandler from "../../services/apiHandler";
 import { useUser } from '../../context/UserContext';
 import { AxiosError } from "axios";
 
 interface ErrorResponse {
   details: string;
+  result: string
 }
 
 
@@ -12,6 +13,7 @@ function LinkReducer() {
   const [originalUrl, setOriginalUrl] = useState<string>("");
   const [newUrl, setNewUrl] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const [warning, setWarning] = useState<string>("");
   const { user } = useUser();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,7 +35,8 @@ function LinkReducer() {
       const axiosError = err as AxiosError<ErrorResponse>
       if (axiosError.response) {
         if (axiosError.response.status === 409) {
-            setError(axiosError.response.data.details);
+            setWarning(axiosError.response.data.details);
+            setNewUrl(axiosError.response.data.result || "");
         } else {
             setError("Error during the process. Please retry later.");
         }
@@ -60,9 +63,14 @@ function LinkReducer() {
         </div>
         <button type="submit">Shorten</button>
       </form>
-      {error ? <p style={{ color: "red" }}>{error}</p> : 
-      <a href={newUrl} target="_blank" rel="noopener noreferrer">{newUrl}</a>
-      }
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      {warning ?
+        <div>
+          <p style={{ color: "orange" }}>{warning}</p>
+          <a href={newUrl} target="_blank" rel="noopener noreferrer">{newUrl}</a>
+        </div> :
+        <a href={newUrl} target="_blank" rel="noopener noreferrer">{newUrl}</a>
+    }
     </div>
   );
 }
