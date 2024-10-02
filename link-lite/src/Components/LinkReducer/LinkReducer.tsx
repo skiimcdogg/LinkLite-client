@@ -1,24 +1,48 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import apiHandler from "../../services/apiHandler";
+import { useUser } from '../../context/UserContext';
+import { AxiosError } from "axios";
+
+interface ErrorResponse {
+  details: string;
+  result: string
+}
+
 
 function LinkReducer() {
   const [originalUrl, setOriginalUrl] = useState<string>("");
   const [newUrl, setNewUrl] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const [warning, setWarning] = useState<string>("");
+  const { user } = useUser();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
+    const { value } = event.target;    
     setOriginalUrl(value);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (!user) {
+      setError("You need to be logged in to shorten a URL.");
+      return;
+    }
+
     try {
-      const response = await apiHandler.shortenUrl(originalUrl);
-      setNewUrl(response.data);
+      const response = await apiHandler.shortenUrl(originalUrl, user.id);      
+      setNewUrl(response["result"]);
     } catch (err) {
-      setError("Error during the process. Please retry later.");
-      console.error(err);
+      const axiosError = err as AxiosError<ErrorResponse>
+      if (axiosError.response) {
+        if (axiosError.response.status === 409) {
+            setWarning(axiosError.response.data.details);
+            setNewUrl(axiosError.response.data.result || "");
+        } else {
+            setError("Error during the process. Please retry later.");
+        }
+    } else {
+        setError("Network error or server is unreachable.");
+    }
     }
   };
 
@@ -37,8 +61,16 @@ function LinkReducer() {
             required
           />
         </div>
+        <button type="submit">Shorten</button>
       </form>
-      {error ? <p style={{ color: "red" }}>{error}</p> : <p>{newUrl}</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      {warning ?
+        <div>
+          <p style={{ color: "orange" }}>{warning}</p>
+          <a href={newUrl} target="_blank" rel="noopener noreferrer">{newUrl}</a>
+        </div> :
+        <a href={newUrl} target="_blank" rel="noopener noreferrer">{newUrl}</a>
+    }
     </div>
   );
 }

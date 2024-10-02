@@ -7,6 +7,8 @@ import About from "./Components/About/About";
 import UserSignIn from "./Components/UserCredentials/UserSignIn";
 import UserSignUp from "./Components/UserCredentials/UserSignUp";
 import Sidebar from "./Components/Sidebar/Sidebar";
+import UserCheckEmail from "./Components/UserCredentials/UserCheckEmail";
+import UserEmailVerification from "./Components/UserCredentials/UserEmailVerification";
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
             <Route path="/my-page" element={<UserPage />} />
             <Route path="/login" element={<UserSignIn />} />
             <Route path="/signup" element={<UserSignUp />} />
+            <Route path="/verify-email" element={<UserCheckEmail />} />
+            <Route path="/email-verification" element={<UserEmailVerification />} />
             <Route path="/about" element={<About />} />
           </Routes>
         </div>

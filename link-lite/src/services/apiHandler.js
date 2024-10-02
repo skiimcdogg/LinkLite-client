@@ -1,23 +1,18 @@
-import axios from 'axios';
-
-const service = axios.create({
-    baseURL: process.env.REACT_APP_BACKEND_URL
-})
-
-function errorHandler(error) {
-    if(error.response.data) {
-        console.error(error.response.data);
-        throw error;
-    }
-    throw error;
-}
+import { initializeService, errorHandler, getAccessToken } from "./apiServices";
 
 const apiHandler = {
-    service,
 
-    async shortenUrl(originalUrl) {
+    async shortenUrl(originalUrl, userId) {
         try {
-            const response = await service.post("/shorten-url", originalUrl);
+            const service = await initializeService();
+            const accessToken = getAccessToken();            
+            const response = await service.post("/shorten-url/", { originalUrl, userId },
+                {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                }
+            );            
             return response.data
         } catch(err) {
             errorHandler(err)
@@ -26,7 +21,10 @@ const apiHandler = {
 
     async getUrlsList() {
         try {
-            const response = await service.get("/list-user-urls");
+            const service = await initializeService();
+            const response = await service.get("/list-user-urls/", { headers: {
+                'Authorization': `Bearer ${getAccessToken}`}
+            });
             return response.data
         } catch(err) {
             errorHandler(err)
@@ -35,6 +33,7 @@ const apiHandler = {
 
     async redirectNewUrl(shortenUrl) {
         try {
+            const service = await initializeService();
             const response = await service.get(`/${shortenUrl}`, { maxRedirects: 0 });
             if(response.status >= 300 && response.status < 400) {
                 const redirectUrl = response.headers.location;
@@ -51,6 +50,7 @@ const apiHandler = {
 
     async deleteUrl(shortenUrl) {
         try {
+            const service = await initializeService();
             const response = await service.delete(`/delete-url/${shortenUrl}/`);
             console.log(response.data.detail);
         } catch(err) {

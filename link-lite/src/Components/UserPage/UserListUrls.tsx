@@ -6,6 +6,12 @@ type UserListUrlsProps = {
 };
 
 function UserListUrls({ urls }: UserListUrlsProps) {
+
+  const timeConverter = (date: number) => {
+    let dateObject = new Date(date * 1000)
+    return dateObject.toLocaleDateString()
+  }
+    
   return (
     <div>
       <h1>Your Urls</h1>
@@ -16,22 +22,22 @@ function UserListUrls({ urls }: UserListUrlsProps) {
                 <th>Original URL</th>
                 <th>Creation Date</th>
             </tr>
+        </thead>
         <tbody>
             {
                 urls.map((url: UserUrl) => (
                     <tr key={url.id}>
                         <td>
-                            <a href={url.shortUrl} target="_blank" rel="noopener noreferrer">
-                                {url.shortUrl}
+                            <a href={`${process.env.REACT_APP_BACKEND_URL}/${url.short_url}`} target="_blank" rel="noopener noreferrer">
+                            {`${process.env.REACT_APP_BACKEND_URL}/${url.short_url}`}
                             </a>
                         </td>
-                        <td>{ url.originalUrl }</td>
-                        <td>{ url.createdAt }</td>
+                        <td>{ url.original_url }</td>
+                        <td>{ timeConverter(url.created_at) }</td>
                     </tr>
                 ))
             }
         </tbody>
-        </thead>
       </table>
     </div>
   );

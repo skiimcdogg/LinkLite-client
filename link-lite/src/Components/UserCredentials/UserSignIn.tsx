@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import authApiHandler from '../../services/authApiHandler';
+import { useUser } from "../../context/UserContext";
 
 type signInFormState = {
   email: string,
@@ -12,9 +13,10 @@ function UserSignIn() {
   const [formData, setFormData] = useState<signInFormState>({
     email: "",
     password: ""
-  })
-  const [error, setError] = useState("")
-  const navigate = useNavigate()
+  });
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const { saveUser } = useUser();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -27,7 +29,8 @@ function UserSignIn() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      await authApiHandler.signup(formData);
+      const response = await authApiHandler.login(formData);
+      saveUser(response)
       navigate("/");
     } catch(err) {
       setError('Credentials Error.');

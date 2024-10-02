@@ -29,7 +29,7 @@ function UserSignUp() {
     event.preventDefault();
     try {
       await authApiHandler.signup(formData);
-      navigate("/login/");
+      navigate("/verify-email");
     } catch(err) {
       setError('Error during user creation.');
       console.error(err);
