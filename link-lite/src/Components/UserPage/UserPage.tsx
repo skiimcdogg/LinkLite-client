@@ -27,6 +27,17 @@ function UserPage() {
   fetchUrls();
   }, []);
 
+  const handleDeleteUrl = async(shortUrl: string) => {
+    try {
+      await apiHandler.deleteUrl(shortUrl);
+      setuserUrls((prevState) => ({
+       urls: prevState.urls.filter((url: UserUrl) => url.short_url !== shortUrl)}
+      ))
+    } catch(err) {
+      console.error("error during deleting url", err)
+    };
+  }
+
   if(loading) {
     return <p>Chargement en cours ...</p>
   }
@@ -41,7 +52,7 @@ function UserPage() {
       <p>Email: {user.email}</p>
       {
         userUrls?.urls?.length === 0 ? <p>No Urls yet to display</p> :
-        <UserListUrls urls={userUrls?.urls || []} />
+        <UserListUrls urls={userUrls?.urls || []} handleDeleteUrl={handleDeleteUrl} />
       }
     </div>
   );

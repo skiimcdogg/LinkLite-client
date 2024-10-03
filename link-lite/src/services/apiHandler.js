@@ -48,10 +48,10 @@ const apiHandler = {
         }
     },
 
-    async deleteUrl(shortenUrl) {
+    async deleteUrl(shortUrl) {
         try {
             const service = await initializeService();
-            const response = await service.delete(`/delete-url/${shortenUrl}/`);
+            const response = await service.delete(`/delete-url/${shortUrl}/`);
             console.log(response.data.detail);
         } catch(err) {
             errorHandler(err)
