@@ -1,16 +1,26 @@
 import React from 'react';
 import { UserUrl } from '../../type';
+import apiHandler from '../../services/apiHandler';
 
 type UserListUrlsProps = {
-    urls: UserUrl[]
+    urls: UserUrl[],
+    handleDeleteUrl: (shortUrl: string) => void
 };
 
-function UserListUrls({ urls }: UserListUrlsProps) {
+function UserListUrls({ urls, handleDeleteUrl }: UserListUrlsProps) {
 
   const timeConverter = (date: number) => {
     let dateObject = new Date(date * 1000)
     return dateObject.toLocaleDateString()
   }
+
+  // const handleDeleteUrl = async(shortUrl: string) => {
+  //   try {
+  //     await apiHandler.deleteUrl(shortUrl);
+  //   } catch(err) {
+  //     console.error("error during deleting url", err)
+  //   };
+  // }
     
   return (
     <div>
@@ -34,6 +44,7 @@ function UserListUrls({ urls }: UserListUrlsProps) {
                         </td>
                         <td>{ url.original_url }</td>
                         <td>{ timeConverter(url.created_at) }</td>
+                        <td> <button onClick={() => handleDeleteUrl(url.short_url)}>Delete</button> </td>
                     </tr>
                 ))
             }
