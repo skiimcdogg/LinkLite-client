@@ -58,10 +58,13 @@ function LinkReducer() {
             name="first_name"
             value={originalUrl}
             onChange={handleChange}
+            className="input-custom"
             required
           />
         </div>
-        <button type="submit">Shorten</button>
+        <button type="submit"
+        className="btn-custom"
+        >Shorten</button>
       </form>
       {error && <p style={{ color: "red" }}>{error}</p>}
       {warning ?

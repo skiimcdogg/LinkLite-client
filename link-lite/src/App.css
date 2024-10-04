@@ -1,39 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Pour Chrome et Safari */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    background-color: #1f2937 !important; /* Forcer le fond gris foncé */
+    color: #39FF14 !important; /* Force la couleur du texte en néon vert */
+    font-family: 'Press Start 2P', sans-serif !important; /* Forcer la police de caractères */
+    -webkit-box-shadow: 0 0 20px #39FF14 inset !important; /* Réapplique le fond gris foncé */
+    box-shadow: 0 0 5px #39FF14 !important;
+    -webkit-text-fill-color: #39FF14 !important; /* Forcer la couleur du texte */
+    transition: background-color 5000s ease-in-out 0s; /* Hack pour forcer la persistance du fond */
+  }
+
+  /* Styles lors du hover sur les propositions d'autocomplétion */
+  input:hover:-webkit-autofill,
+  textarea:hover:-webkit-autofill,
+  select:hover:-webkit-autofill {
+    box-shadow: 0 0 5px #39FF14 !important;
+  }
+
+  /* Focus explicite lors de la sélection */
+  input:focus:-webkit-autofill,
+  textarea:focus:-webkit-autofill,
+  select:focus:-webkit-autofill {
+    box-shadow: 0 0 5px #39FF14 !important;
+  }
+}
 
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  @apply bg-darkBackground text-neonGreen font-retro;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.btn-custom {
+  @apply my-6 w-auto bg-purple-800 hover:bg-blue-800 text-neonGreen font-bold py-2 px-4 rounded-lg shadow-lg transform transition duration-300 hover:scale-105;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.input-custom {
+  @apply w-full 
+  max-w-md
+  bg-gray-900 
+  text-neonGreen 
+  border 
+  border-neonGreen 
+  rounded 
+  px-3 
+  py-1
+  mt-2 
+  placeholder-neonGreen 
+  focus:outline-none 
+  focus:ring-2 
+  focus:ring-neonGreen 
+  focus:border-transparent 
+  shadow-md 
+  shadow-neonGreen
+  transition 
+  duration-300 
+  ease-in-out 
+  hover:border-green-400;
 }
