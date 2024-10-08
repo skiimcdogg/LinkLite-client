@@ -47,6 +47,7 @@ function UserSignUp() {
             name="first_name"
             value={formData.first_name}
             onChange={handleChange}
+            className='input-custom'
             required
           />
         </div>
@@ -57,6 +58,7 @@ function UserSignUp() {
             name="email"
             value={formData.email}
             onChange={handleChange}
+            className='input-custom'
             required
           />
         </div>
@@ -67,11 +69,15 @@ function UserSignUp() {
             name="password"
             value={formData.password}
             onChange={handleChange}
+            className='input-custom'
             required
           />
         </div>
         {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit">Sign Up!</button>
+        <button 
+        type="submit"
+        className='btn-custom'
+        >Register</button>
       </form>
     </div>
   );

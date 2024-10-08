@@ -41,7 +41,7 @@ function UserSignIn() {
   
   return (
     <div>
-      <h1>UserSignIn</h1>
+      <h1>Let's connect</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Email:</label>
@@ -50,6 +50,7 @@ function UserSignIn() {
             name="email"
             value={formData.email}
             onChange={handleChange}
+            className='input-custom'
             required
           />
         </div>
@@ -60,13 +61,17 @@ function UserSignIn() {
             name="password"
             value={formData.password}
             onChange={handleChange}
+            className='input-custom'
             required
           />
         </div>
         {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit">Connect</button>
+        <button 
+        type="submit"
+        className='btn-custom'
+        >Connect</button>
       </form>
-      <p>No account yet ? Create an account here: <Link to={"/signup"}>Signup</Link></p>
+      <p>No account yet ? Create an account here: <Link to={"/signup"} className="hover:text-neonBlue">Register</Link></p>
     </div>
   );
 };
