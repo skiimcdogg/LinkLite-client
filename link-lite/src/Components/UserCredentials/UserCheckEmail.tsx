@@ -1,8 +1,7 @@
 function UserCheckEmail() {
   return (
-    <div className="flex items-center justify-center min-h-[calc(100vh-4rem)]">
+    <div className="flex items-center justify-center absolute inset-0">
       <h1 className="text-3xl">Check your Emails !</h1> 
-      {/* Juste une phrase pour dire qu'il faut check le mail */}
     </div>
   );
 };
