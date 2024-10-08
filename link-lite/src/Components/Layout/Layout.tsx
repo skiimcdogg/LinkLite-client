@@ -14,9 +14,11 @@ function Layout({ children }: {children: React.ReactNode}) {
   return (
     <div className="App">
         { showHeaderAndSidebar && <Header toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} /> }
-        <div className="mt-20">
+        <div className="flex h-screen">
           { showHeaderAndSidebar && <Sidebar isSidebarOpen={isSidebarOpen} /> }
-          <div>
+          <div
+          className={`flex-1 transition-all duration-300 pt-4 mt-20 ${isSidebarOpen ? 'ml-64' : 'ml-0'}`}
+          >
             {children}
           </div>
         </div>
@@ -25,3 +27,5 @@ function Layout({ children }: {children: React.ReactNode}) {
 };
 
 export default Layout;
+
+

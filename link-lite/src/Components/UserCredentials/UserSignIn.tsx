@@ -40,8 +40,8 @@ function UserSignIn() {
 
   
   return (
-    <div>
-      <h1>Let's connect</h1>
+    <div className="flex flex-col items-center justify-center top-0 left-0 right-0 bottom-0 pt-16 mx-auto my-auto max-w-lg max-h-screen">
+      <h1 className='mb-6 text-xl'>Let's connect</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Email:</label>

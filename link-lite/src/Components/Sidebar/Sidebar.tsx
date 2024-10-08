@@ -2,22 +2,43 @@ import { Link } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
 
 type SidebarProps = {
-  isSidebarOpen: boolean
-}
+  isSidebarOpen: boolean;
+};
 
 function Sidebar({ isSidebarOpen }: SidebarProps) {
   const { user } = useUser();
   return (
-    <div>
-      <div className={`fixed top-16 left-0 w-64 pt-10 bg-gradient-to-r from-sidebarBackground to-headerBackground h-full transform transition-transform duration-300 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} shadow-xl`}>
-        <h1>Sidebar</h1>
+    <div
+      className={`z-10 fixed top-16 left-0 h-full transition-transform duration-300 ${
+        isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+      }`}
+    >
+      <div className="bg-gradient-to-r from-sidebarBackground to-headerBackground w-64 pt-16 shadow-xl h-full">
         <div className="mb-1">
-        <Link to={"/"} className="hover:text-neonBlue">home</Link>
+          <Link to={"/"} className="block hover:text-neonBlue pl-4 py-2">
+            home
+          </Link>
         </div>
         <div className="mb-1">
-        {user ? <Link to={"/my-page"}>My infos & Urls</Link> : <p></p>}
+          {user ? (
+            <Link
+              to={"/my-page"}
+              className="block hover:text-neonBlue pl-4 py-2"
+            >
+              My Page
+            </Link>
+          ) : (
+            <Link
+              to={"/login"}
+              className="block hover:text-neonBlue pl-4 py-2"
+            >
+              My Page
+            </Link>
+          )}
         </div>
-        <Link to={"/about"} className="hover:text-neonBlue">About</Link>
+        <Link to={"/about"} className="block hover:text-neonBlue pl-4 py-2">
+          About
+        </Link>
       </div>
     </div>
   );

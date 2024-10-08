@@ -31,8 +31,8 @@ function Header({ toggleSidebar, isSidebarOpen }: HeaderProps) {
       </button>
       <h1>LinkLite</h1>
       {
-      user ? <button onClick={handleLogout}>Logout</button> : 
-      <Link to={"/login"}>Login</Link>
+      user ? <button onClick={handleLogout} className="hover:text-neonBlue">Logout</button> : 
+      <Link to={"/login"} className="hover:text-neonBlue">Connect</Link>
       }
     </div>
   );
