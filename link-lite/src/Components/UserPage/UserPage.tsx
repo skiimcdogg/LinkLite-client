@@ -3,7 +3,7 @@ import { useUser } from '../../context/UserContext';
 import { UserUrl } from '../../type';
 import apiHandler from '../../services/apiHandler';
 import UserListUrls from './UserListUrls';
-
+import { ReactComponent as LoadingIcon } from '../../images/green-spinner.svg';
 
 type UserUrlsListState = {
   urls: UserUrl[]
@@ -13,16 +13,20 @@ function UserPage() {
   const [userUrls, setuserUrls] = useState<UserUrlsListState>({
     urls: []
   });
+  const [urlsLoading, setUrlsLoading] = useState<boolean>(true);
   const { user, loading } = useUser();
 
   useEffect( () => {    
     const fetchUrls = async() => {
     try {
       const response = await apiHandler.getUrlsList();
-      setuserUrls(response)
+      setuserUrls(response);
+      setUrlsLoading(false);
     } catch(err) {
       console.error('Problem during fetching urls.', err)
-    };
+    } finally {
+      setUrlsLoading(false)
+    }
   };
   fetchUrls();
   }, []);
@@ -37,9 +41,12 @@ function UserPage() {
       console.error("error during deleting url", err)
     };
   }
-
-  if(loading) {
-    return <p>Loading ...</p>
+  if(loading || urlsLoading) {
+    return (
+     <div className="flex items-center justify-center">
+      <LoadingIcon />
+     </div>
+    )
   }
 
   if (!user) {

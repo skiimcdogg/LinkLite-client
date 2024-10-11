@@ -1,6 +1,4 @@
-import React from "react";
 import { UserUrl } from "../../type";
-import apiHandler from "../../services/apiHandler";
 
 type UserListUrlsProps = {
   urls: UserUrl[];

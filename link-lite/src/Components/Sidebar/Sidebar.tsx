@@ -16,7 +16,7 @@ function Sidebar({ isSidebarOpen }: SidebarProps) {
       <div className="bg-gradient-to-r from-sidebarBackground to-headerBackground w-64 pt-16 shadow-xl h-full">
         <div className="mb-1">
           <Link to={"/"} className="block hover:text-neonBlue pl-4 py-2">
-            home
+            Home
           </Link>
         </div>
         <div className="mb-1">
