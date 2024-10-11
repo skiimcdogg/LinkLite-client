@@ -39,17 +39,17 @@ function UserPage() {
   }
 
   if(loading) {
-    return <p>Chargement en cours ...</p>
+    return <p>Loading ...</p>
   }
 
   if (!user) {
-    return <p>Veuillez vous connecter pour voir vos informations.</p>;
+    return <p>please connect to see your page.</p>;
   };
 
   return (
     <div>
-      <h1>Bienvenue, {user.username}</h1>
-      <p>Email: {user.email}</p>
+      <h1>Welcome, {user.username.charAt(0).toUpperCase() + user.username.slice(1)}</h1>
+      <p className='mb-5'>{user.email}</p>
       {
         userUrls?.urls?.length === 0 ? <p>No Urls yet to display</p> :
         <UserListUrls urls={userUrls?.urls || []} handleDeleteUrl={handleDeleteUrl} />

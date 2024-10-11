@@ -47,9 +47,10 @@ function LinkReducer() {
   };
 
   return (
-    <div>
-      <h1>LinkReducer</h1>
-      <p>Connect to list all your urls and handle them.</p>
+    <div className="flex flex-col items-center justify-center pt-16 mx-auto my-auto w-full max-w-2xl">
+      <p className="mb-5">LinkLite: Simplify your URLs. Join us to manage and shorten your links effortlessly.</p>
+      { 
+      user ? 
       <form onSubmit={handleSubmit}>
         <div>
           <label>Fill your URL:</label>
@@ -58,11 +59,16 @@ function LinkReducer() {
             name="first_name"
             value={originalUrl}
             onChange={handleChange}
+            className="input-custom"
             required
           />
         </div>
-        <button type="submit">Shorten</button>
-      </form>
+        <button type="submit"
+        className="btn-custom"
+        >Shorten</button>
+      </form> :
+      <p className="text-sm">Connect or use the test-email on my Linkedin post to reduce your Urls.</p>
+      }
       {error && <p style={{ color: "red" }}>{error}</p>}
       {warning ?
         <div>

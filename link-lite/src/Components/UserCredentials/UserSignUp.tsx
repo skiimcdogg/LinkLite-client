@@ -37,8 +37,8 @@ function UserSignUp() {
   }
 
   return (
-    <div>
-      <h1>UserSignUp</h1>
+    <div className="flex flex-col items-center justify-center top-0 left-0 right-0 bottom-0 pt-16 mx-auto my-auto max-w-lg max-h-screen">
+      <h1 className='mb-6 text-xl'>Create your account</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Username:</label>
@@ -47,6 +47,7 @@ function UserSignUp() {
             name="first_name"
             value={formData.first_name}
             onChange={handleChange}
+            className='input-custom'
             required
           />
         </div>
@@ -57,6 +58,7 @@ function UserSignUp() {
             name="email"
             value={formData.email}
             onChange={handleChange}
+            className='input-custom'
             required
           />
         </div>
@@ -67,11 +69,15 @@ function UserSignUp() {
             name="password"
             value={formData.password}
             onChange={handleChange}
+            className='input-custom'
             required
           />
         </div>
         {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit">Sign Up!</button>
+        <button 
+        type="submit"
+        className='btn-custom'
+        >Register</button>
       </form>
     </div>
   );
