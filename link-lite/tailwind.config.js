@@ -10,6 +10,7 @@ module.exports = {
         neonPink: '#FF2079',  
         neonBlue: '#2e31ff',  
         neonYellow: '#F7E600',
+        neonRed: '#FF073A',
         darkBackground: '#1A1A1D', 
         headerBackground: '#16162b', 
         sidebarBackground: '#041705', 
