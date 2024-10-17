@@ -13,7 +13,13 @@ function Layout({ children }: {children: React.ReactNode}) {
 
   return (
     <div className="App">
-        { showHeaderAndSidebar && <Header toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} /> }
+        { showHeaderAndSidebar && (
+          <>
+          <Header toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
+          {/* Barre grise collée sous le header */}
+          <div className="bg-gray-400 h-24 fixed top-0 left-0 right-0"></div> {/* Barre grise de 2 unités de hauteur */}
+      </>
+        )}
         <div className="flex h-screen">
           { showHeaderAndSidebar && <Sidebar isSidebarOpen={isSidebarOpen} /> }
           <div

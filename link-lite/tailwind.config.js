@@ -6,17 +6,19 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        neonGreen: '#39FF14', 
-        neonPink: '#FF2079',  
-        neonBlue: '#2e31ff',  
-        neonYellow: '#F7E600',
-        neonRed: '#FF073A',
+        retroBlue: '#2e31ff',  
+        retroBeige: '#F2E5BF',
+        retroOrange: '#FD8B51',
+        retroRed: '#CB6040',
+        retroRedLight: '#de8266',
         darkBackground: '#1A1A1D', 
         headerBackground: '#16162b', 
         sidebarBackground: '#041705', 
       },
       fontFamily: {
-        retro: ['"Press Start 2P"', 'cursive'],
+        textRetro: ['"Roboto Slab"', 'cursive'],
+        titleAppRetro: ['"Lobster Two"', 'cursive'],
+        SidebarRetro: ['"Bebas Neue"', 'cursive'],
       },
       boxShadow: {
         'neon': '0 0 15px rgba(57, 255, 20, 0.8)',
@@ -31,7 +33,7 @@ module.exports = {
         },
       },
       gradientColorStops: {
-        'neon-gradient': ['#39FF14', '#FF2079', '#1F51FF'], // Dégradé de couleurs néon
+        'neon-gradient': ['#39FF14', '#FF2079', '#1F51FF'], 
       },
     },
   },

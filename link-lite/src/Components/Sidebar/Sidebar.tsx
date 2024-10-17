@@ -13,9 +13,9 @@ function Sidebar({ isSidebarOpen }: SidebarProps) {
         isSidebarOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
-      <div className="bg-gradient-to-r from-sidebarBackground to-headerBackground w-64 pt-16 shadow-xl h-full">
+      <div className="bg-retroRed w-64 pt-16 shadow-xl h-full">
         <div className="mb-1">
-          <Link to={"/"} className="block hover:text-neonBlue pl-4 py-2">
+          <Link to={"/"} className="block font-SidebarRetro text-4xl hover:text-retroBlue pl-4 py-2">
             Home
           </Link>
         </div>
@@ -23,20 +23,20 @@ function Sidebar({ isSidebarOpen }: SidebarProps) {
           {user ? (
             <Link
               to={"/my-page"}
-              className="block hover:text-neonBlue pl-4 py-2"
+              className="block font-SidebarRetro text-2xl hover:text-retroBlue pl-4 py-2"
             >
               My Page
             </Link>
           ) : (
             <Link
               to={"/login"}
-              className="block hover:text-neonBlue pl-4 py-2"
+              className="block font-SidebarRetro text-2xl hover:text-retroBlue pl-4 py-2"
             >
               My Page
             </Link>
           )}
         </div>
-        <Link to={"/about"} className="block hover:text-neonBlue pl-4 py-2">
+        <Link to={"/about"} className="block font-SidebarRetro text-2xl hover:text-retroBlue pl-4 py-2">
           About
         </Link>
       </div>

@@ -67,7 +67,7 @@ function LinkReducer() {
         className="btn-custom"
         >Shorten</button>
       </form> :
-      <p className="text-sm">Connect or use the test-email on my Linkedin post to reduce your Urls.</p>
+      <p className="text-m">Connect or use the test-email on my Linkedin post to reduce your Urls.</p>
       }
       {error && <p style={{ color: "red" }}>{error}</p>}
       {warning ?
