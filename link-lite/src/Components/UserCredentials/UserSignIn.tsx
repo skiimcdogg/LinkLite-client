@@ -71,7 +71,7 @@ function UserSignIn() {
         className='btn-custom'
         >Connect</button>
       </form>
-      <p>No account yet ? Create an account here: <Link to={"/signup"} className="hover:text-neonBlue">Register</Link></p>
+      <p>No account yet ? Create an account here: <Link to={"/signup"} className="hover:text-retroRed">Register</Link></p>
     </div>
   );
 };

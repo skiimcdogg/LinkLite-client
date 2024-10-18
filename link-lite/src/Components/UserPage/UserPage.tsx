@@ -55,8 +55,8 @@ function UserPage() {
 
   return (
     <div>
-      <h1>Welcome, {user.username.charAt(0).toUpperCase() + user.username.slice(1)}</h1>
-      <p className='mb-5'>{user.email}</p>
+      <h1 className='mt-7'>Welcome, {user.username.charAt(0).toUpperCase() + user.username.slice(1)}</h1>
+      <p className='mb-7'>{user.email}</p>
       {
         userUrls?.urls?.length === 0 ? <p>No Urls yet to display</p> :
         <UserListUrls urls={userUrls?.urls || []} handleDeleteUrl={handleDeleteUrl} />
